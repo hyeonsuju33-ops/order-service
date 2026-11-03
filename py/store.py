@@ -5,8 +5,12 @@ class Store:
     def __init__(self, path=":memory:"):
         self.db = sqlite3.connect(path, check_same_thread=False)
         self.db.execute(
-            "CREATE TABLE IF NOT EXISTS orders (id TEXT, user_id TEXT, status TEXT, amount_cents INTEGER)"
+            "CREATE TABLE IF NOT EXISTS orders "
+            "(id TEXT, user_id TEXT, status TEXT, amount_cents INTEGER, created_at TEXT)"
         )
+        columns = [row[1] for row in self.db.execute("PRAGMA table_info(orders)")]
+        if "created_at" not in columns:
+            self.db.execute("ALTER TABLE orders ADD COLUMN created_at TEXT")
         self.db.execute("CREATE TABLE IF NOT EXISTS users (id TEXT, name TEXT, email TEXT)")
 
     def search_users(self, name):
