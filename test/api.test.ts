@@ -6,7 +6,7 @@ import type { Order } from '../src/types.ts';
 const order = (id: string, amountCents: number, createdAt = '2026-11-03T10:00:00Z'): Order => ({ id, userId: 'u2', amountCents, status: 'paid', createdAt });
 
 test('public API surface', () => {
-  assert.deepEqual(Object.keys(api).sort(), ['cancelOrder', 'dailyReport', 'greet', 'listOrders', 'qualifiesForFreeShipping']);
+  assert.deepEqual(Object.keys(api).sort(), ['cancelOrder', 'dailyReport', 'greet', 'listOrders', 'qualifiesForFreeShipping', 'refundOrder']);
 });
 
 test('greet uses the display name', () => {
