@@ -36,6 +36,12 @@ test('only admins refund paid or shipped orders', () => {
   assert.throws(() => api.refundOrder({ userId: 'u1', orderId: 'a' }, orders), /not refundable/);
 });
 
+test('admins can refund shipped orders, which owners still cannot cancel', () => {
+  const orders = new Map<string, Order>([['a', { ...order('a', 100), status: 'shipped' }]]);
+  assert.throws(() => api.cancelOrder({ userId: 'u2', orderId: 'a' }, orders), /invalid transition/);
+  assert.equal(api.refundOrder({ userId: 'u1', orderId: 'a' }, orders).status, 'cancelled');
+});
+
 test('owners and admins can cancel, others cannot', () => {
   const orders = new Map<string, Order>([['a', order('a', 100)]]);
   assert.equal(api.cancelOrder({ userId: 'u2', orderId: 'a' }, orders).status, 'cancelled');

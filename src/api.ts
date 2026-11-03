@@ -1,5 +1,5 @@
 import { canCancel } from './auth.ts';
-import { isRefundable, totalCents, transition } from './orders.ts';
+import { refund, totalCents, transition } from './orders.ts';
 import { ordersOnDay } from './report.ts';
 import type { Order } from './types.ts';
 import { displayName, getUser } from './users.ts';
@@ -42,10 +42,7 @@ export function refundOrder(req: CancelRequest, orders: Map<string, Order>): Ord
   if (user.role !== 'admin') {
     throw new Error('forbidden');
   }
-  if (!isRefundable(order)) {
-    throw new Error('not refundable');
-  }
-  const next = transition(order, 'cancelled');
+  const next = refund(order);
   orders.set(order.id, next);
   return next;
 }

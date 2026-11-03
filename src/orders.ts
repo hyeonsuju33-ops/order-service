@@ -23,3 +23,10 @@ export function totalCents(orders: Order[]): number {
 export function isRefundable(order: Order): boolean {
   return order.status === 'paid' || order.status === 'shipped';
 }
+
+export function refund(order: Order): Order {
+  if (!isRefundable(order)) {
+    throw new Error('not refundable');
+  }
+  return { ...order, status: 'cancelled' };
+}
