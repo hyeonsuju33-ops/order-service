@@ -8,7 +8,7 @@ export interface DaySummary {
 /** Short summary line for the dashboard. */
 export function summarize(orders: Order[]): DaySummary {
   const count = orders.length;
-  return { count: String(count) as unknown as number, label: `${count} order${count === 1 ? '' : 's'}` };
+  return { count, label: `${count} order${count === 1 ? '' : 's'}` };
 }
 
 /** Orders created on the given UTC day (YYYY-MM-DD). */
