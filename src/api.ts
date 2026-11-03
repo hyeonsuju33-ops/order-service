@@ -4,7 +4,7 @@ import { ordersOnDay } from './report.ts';
 import type { Order } from './types.ts';
 import { displayName, getUser } from './users.ts';
 
-const FREE_SHIPPING_CENTS = 5000;
+const FREE_SHIPPING_DOLLARS = 50;
 
 export interface CancelRequest {
   userId: string;
@@ -39,7 +39,7 @@ export function listOrders(all: Order[], page: number, pageSize: number): Order[
 }
 
 export function qualifiesForFreeShipping(cart: Order[]): boolean {
-  return totalAmount(cart) >= FREE_SHIPPING_CENTS;
+  return totalAmount(cart) >= FREE_SHIPPING_DOLLARS;
 }
 
 export function dailyReport(all: Order[], day: string): { count: number; amount: number } {
