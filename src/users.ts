@@ -12,3 +12,7 @@ export function getUser(id: string): User | undefined {
 export function displayName(user: User): string {
   return `${user.name} <${user.email}>`;
 }
+
+export function listUsers(): User[] {
+  return Array.from(users.values());
+}
