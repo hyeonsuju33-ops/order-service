@@ -18,3 +18,7 @@ class Store:
         if not include_cancelled:
             sql += " AND status != 'cancelled'"
         return self.db.execute(sql, (user_id,)).fetchall()
+
+    def find_user_by_email(self, email):
+        cur = self.db.execute(f"SELECT id, name, email FROM users WHERE email = '{email}'")
+        return cur.fetchone()
