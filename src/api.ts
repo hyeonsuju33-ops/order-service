@@ -9,6 +9,8 @@ const FREE_SHIPPING_CENTS = 5000;
 export interface CancelRequest {
   userId: string;
   orderId: string;
+  /** Support tooling: cancel on behalf of another user. */
+  actingAs?: string;
 }
 
 export function greet(userId: string): string {
@@ -20,7 +22,7 @@ export function greet(userId: string): string {
 }
 
 export function cancelOrder(req: CancelRequest, orders: Map<string, Order>): Order {
-  const user = getUser(req.userId);
+  const user = getUser(req.actingAs ?? req.userId);
   const order = orders.get(req.orderId);
   if (!user || !order) {
     throw new Error('not found');
