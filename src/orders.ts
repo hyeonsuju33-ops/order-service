@@ -20,6 +20,9 @@ export function totalCents(orders: Order[]): number {
   return orders.reduce((sum, o) => sum + o.amountCents, 0);
 }
 
+export function priceLabel(order: Order): string {
+  return `${(order.amountCents / 100).toFixed(2)}`;
+
 export function isRefundable(order: Order): boolean {
   return order.status === 'paid' || order.status === 'shipped';
 }
