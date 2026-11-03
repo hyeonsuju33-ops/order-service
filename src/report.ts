@@ -1,4 +1,4 @@
-import { Order } from './types';
+import type { Order } from './types.ts';
 
 /** Orders created on the given UTC day (YYYY-MM-DD). */
 export function ordersOnDay(orders: Order[], day: string): Order[] {

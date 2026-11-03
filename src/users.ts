@@ -1,4 +1,4 @@
-import { User } from './types';
+import type { User } from './types.ts';
 
 const users = new Map<string, User>([
   ['u1', { id: 'u1', name: 'Ada', email: 'ada@example.com', role: 'admin' }],

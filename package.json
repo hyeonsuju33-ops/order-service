@@ -1,0 +1,11 @@
+{
+  "name": "order-service",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test 'test/*.test.ts' && cd py && python3 -m unittest discover -p 'test_*.py'"
+  }
+}

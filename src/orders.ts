@@ -1,4 +1,4 @@
-import { Order, OrderStatus } from './types';
+import type { Order, OrderStatus } from './types.ts';
 
 const ALLOWED: Record<OrderStatus, OrderStatus[]> = {
   pending: ['paid', 'cancelled'],

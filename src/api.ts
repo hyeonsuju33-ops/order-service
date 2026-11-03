@@ -1,8 +1,8 @@
-import { canCancel } from './auth';
-import { totalCents, transition } from './orders';
-import { ordersOnDay } from './report';
-import { Order } from './types';
-import { displayName, getUser } from './users';
+import { canCancel } from './auth.ts';
+import { totalCents, transition } from './orders.ts';
+import { ordersOnDay } from './report.ts';
+import type { Order } from './types.ts';
+import { displayName, getUser } from './users.ts';
 
 const FREE_SHIPPING_CENTS = 5000;
 
