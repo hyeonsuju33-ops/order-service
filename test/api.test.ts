@@ -16,7 +16,7 @@ test('greet uses the display name', () => {
 
 test('dailyReport counts and sums one UTC day', () => {
   const all = [order('a', 1000), order('b', 2500), order('c', 999, '2026-11-04T00:00:01Z')];
-  assert.deepEqual(api.dailyReport(all, '2026-11-03'), { count: 2, cents: 3500 });
+  assert.deepEqual(api.dailyReport(all, '2026-11-03'), { count: 2, amount: 35 });
 });
 
 test('free shipping from 50.00', () => {

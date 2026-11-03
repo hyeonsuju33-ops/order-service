@@ -15,9 +15,9 @@ export function transition(order: Order, to: OrderStatus): Order {
   return { ...order, status: to };
 }
 
-/** Sum of order amounts in cents. */
-export function totalCents(orders: Order[]): number {
-  return orders.reduce((sum, o) => sum + o.amountCents, 0);
+/** Sum of order amounts in dollars. */
+export function totalAmount(orders: Order[]): number {
+  return orders.reduce((sum, o) => sum + o.amountCents, 0) / 100;
 }
 
 export function isRefundable(order: Order): boolean {

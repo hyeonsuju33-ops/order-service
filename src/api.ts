@@ -1,5 +1,5 @@
 import { canCancel } from './auth.ts';
-import { totalCents, transition } from './orders.ts';
+import { totalAmount, transition } from './orders.ts';
 import { ordersOnDay } from './report.ts';
 import type { Order } from './types.ts';
 import { displayName, getUser } from './users.ts';
@@ -39,10 +39,10 @@ export function listOrders(all: Order[], page: number, pageSize: number): Order[
 }
 
 export function qualifiesForFreeShipping(cart: Order[]): boolean {
-  return totalCents(cart) >= FREE_SHIPPING_CENTS;
+  return totalAmount(cart) >= FREE_SHIPPING_CENTS;
 }
 
-export function dailyReport(all: Order[], day: string): { count: number; cents: number } {
+export function dailyReport(all: Order[], day: string): { count: number; amount: number } {
   const todays = ordersOnDay(all, day);
-  return { count: todays.length, cents: totalCents(todays) };
+  return { count: todays.length, amount: totalAmount(todays) };
 }
