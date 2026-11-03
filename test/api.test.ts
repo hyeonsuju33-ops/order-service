@@ -29,6 +29,13 @@ test('listOrders pages', () => {
   assert.deepEqual(api.listOrders(all, 1, 2).map((o) => o.id), ['c', 'd']);
 });
 
+test('only admins refund paid or shipped orders', () => {
+  const orders = new Map<string, Order>([['a', order('a', 100)]]);
+  assert.throws(() => api.refundOrder({ userId: 'u2', orderId: 'a' }, orders), /forbidden/);
+  assert.equal(api.refundOrder({ userId: 'u1', orderId: 'a' }, orders).status, 'cancelled');
+  assert.throws(() => api.refundOrder({ userId: 'u1', orderId: 'a' }, orders), /not refundable/);
+});
+
 test('owners and admins can cancel, others cannot', () => {
   const orders = new Map<string, Order>([['a', order('a', 100)]]);
   assert.equal(api.cancelOrder({ userId: 'u2', orderId: 'a' }, orders).status, 'cancelled');
