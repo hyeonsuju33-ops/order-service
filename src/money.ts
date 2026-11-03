@@ -3,7 +3,7 @@ export function formatCents(cents: number): string {
   const abs = Math.abs(cents);
   const whole = Math.floor(abs / 100);
   const fraction = abs % 100;
-  const decimals = fraction === 0 ? '' : `.${String(fraction).padStart(2, '0').replace(/0$/, '')}`;
+  const decimals = fraction === 0 ? '' : `.${String(fraction).padStart(2, '0')}`;
   return `${cents < 0 ? '-' : ''}${whole}${decimals}`;
 }
 
