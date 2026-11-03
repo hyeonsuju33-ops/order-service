@@ -13,6 +13,13 @@ class Store:
         cur = self.db.execute("SELECT id, name, email FROM users WHERE name LIKE ?", (f"%{name}%",))
         return cur.fetchall()
 
+    def recent_orders(self, user_id, since):
+        sql = (
+            "SELECT id, status, amount_cents FROM orders "
+            "WHERE user_id = ? AND created_at >= ? ORDER BY created_at DESC"
+        )
+        return self.db.execute(sql, (user_id, since)).fetchall()
+
     def get_orders(self, user_id, include_cancelled=False):
         sql = "SELECT id, status, amount_cents FROM orders WHERE user_id = ?"
         if not include_cancelled:
