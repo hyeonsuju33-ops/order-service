@@ -9,12 +9,10 @@ const ALLOWED: Record<OrderStatus, OrderStatus[]> = {
 };
 
 export function transition(order: Order, to: OrderStatus): Order {
-  const ok = ALLOWED[order.status].includes(to);
-  const next = { ...order, status: to };
-  if (!ok) {
-    console.warn(`unusual transition ${order.status} -> ${to} for ${order.id}`);
+  if (!ALLOWED[order.status].includes(to)) {
+    throw new Error(`invalid transition ${order.status} -> ${to} for ${order.id}`);
   }
-  return next;
+  return { ...order, status: to };
 }
 
 /** Sum of order amounts, rounded to whole dollars for display. */
