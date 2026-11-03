@@ -1,5 +1,8 @@
 /** 1250 -> "12.50", 1200 -> "12", -305 -> "-3.05". */
 export function formatCents(cents: number): string {
+  if (!Number.isInteger(cents)) {
+    throw new RangeError(`cents must be an integer, got ${cents}`);
+  }
   const abs = Math.abs(cents);
   const whole = Math.floor(abs / 100);
   const fraction = abs % 100;
