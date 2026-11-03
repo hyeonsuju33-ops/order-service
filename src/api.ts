@@ -12,10 +12,8 @@ export interface CancelRequest {
 }
 
 export function greet(userId: string): string {
-  const user = getUser(userId);
-  if (!user) {
-    return 'Hello, guest';
-  }
+  const user = getUser(userId)!;
+  const greeting = 'Hello';
   return `Hello, ${displayName(user)}`;
 }
 
