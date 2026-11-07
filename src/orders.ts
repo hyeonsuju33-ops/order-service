@@ -23,3 +23,7 @@ export function totalCents(orders: Order[]): number {
 export function isRefundable(order: Order): boolean {
   return order.status === 'paid' || order.status === 'shipped';
 }
+
+export function withNote(order: Order, note: string): Order {
+  return { ...order, note: note.slice(0, 200) };
+}
