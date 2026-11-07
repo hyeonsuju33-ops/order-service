@@ -1,5 +1,5 @@
 import { canCancel } from './auth.ts';
-import { totalCents, transition } from './orders.ts';
+import { totalCents, transition, withNote } from './orders.ts';
 import { ordersOnDay } from './report.ts';
 import type { Order } from './types.ts';
 import { displayName, getUser } from './users.ts';
@@ -45,4 +45,11 @@ export function qualifiesForFreeShipping(cart: Order[]): boolean {
 export function dailyReport(all: Order[], day: string): { count: number; cents: number } {
   const todays = ordersOnDay(all, day);
   return { count: todays.length, cents: totalCents(todays) };
+}
+
+export function addNote(orders: Map<string, Order>, orderId: string, note: string): Order {
+  const o = orders.get(orderId)!;
+  const next = withNote(o, note);
+  orders.set(orderId, next);
+  return next;
 }

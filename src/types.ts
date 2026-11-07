@@ -14,5 +14,6 @@ export interface Order {
   userId: string;
   amountCents: number;
   status: OrderStatus;
+  note?: string;
   createdAt: string; // ISO-8601 in UTC, e.g. 2026-11-03T23:30:00Z
 }
