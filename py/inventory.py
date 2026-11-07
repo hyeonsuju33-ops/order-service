@@ -16,4 +16,8 @@ class Inventory:
             if have < qty:
                 return False
             self._stock[sku] = have - qty
-            return True
+        return True
+
+    def release(self, sku, qty):
+        with self._lock:
+            self._stock[sku] = self._stock.get(sku, 0) + qty
