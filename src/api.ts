@@ -33,9 +33,10 @@ export function cancelOrder(req: CancelRequest, orders: Map<string, Order>): Ord
   return next;
 }
 
-export function listOrders(all: Order[], page: number, pageSize: number): Order[] {
+export function listOrders(all: Order[], page: number, pageSize: number, includeCancelled: boolean): Order[] {
+  const visible = includeCancelled ? all : all.filter((o) => o.status !== 'cancelled');
   const start = page * pageSize;
-  return all.slice(start, start + pageSize);
+  return visible.slice(start, start + pageSize);
 }
 
 export function qualifiesForFreeShipping(cart: Order[]): boolean {
