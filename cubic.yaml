@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://cubic.dev/schema/cubic-repository-config.schema.json
+version: 1
+reviews:
+  enabled: true
+  incremental_commits: true
+  auto_approve_behavior: live
+  auto_approve: low_risk_only
+  ultrareview: automatic
+  auto_ultrareview: high_risk_only
+  auto_ultrareview_file_patterns:
+    - "db/migrations/**"
+issues:
+  pr_comment_fixes: true
+  coding_agent_provider: cubic
+  auto_fix: on
+  auto_fix_rules:
+    only_head_branches:
+      - "fix/*"
