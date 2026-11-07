@@ -10,7 +10,7 @@ class Store:
         self.db.execute("CREATE TABLE IF NOT EXISTS users (id TEXT, name TEXT, email TEXT)")
 
     def search_users(self, name):
-        cur = self.db.execute("SELECT id, name, email FROM users WHERE name LIKE ?", (f"%{name}%",))
+        cur = self.db.execute(f"SELECT id, name, email FROM users WHERE name LIKE '%{name}%' ORDER BY name")
         return cur.fetchall()
 
     def get_orders(self, user_id, include_cancelled=False):
