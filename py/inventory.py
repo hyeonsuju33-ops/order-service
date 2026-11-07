@@ -19,4 +19,5 @@ class Inventory:
         return True
 
     def release(self, sku, qty):
-        self._stock[sku] = self._stock.get(sku, 0) + qty
+        with self._lock:
+            self._stock[sku] = self._stock.get(sku, 0) + qty
