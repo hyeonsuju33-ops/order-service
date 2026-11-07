@@ -13,8 +13,9 @@ class Store:
         cur = self.db.execute("SELECT id, name, email FROM users WHERE name LIKE ?", (f"%{name}%",))
         return cur.fetchall()
 
-    def get_orders(self, user_id, include_cancelled=False):
+    def get_orders(self, user_id, limit=100, include_cancelled=False):
         sql = "SELECT id, status, amount_cents FROM orders WHERE user_id = ?"
         if not include_cancelled:
             sql += " AND status != 'cancelled'"
-        return self.db.execute(sql, (user_id,)).fetchall()
+        sql += " LIMIT ?"
+        return self.db.execute(sql, (user_id, int(limit))).fetchall()

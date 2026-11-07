@@ -10,14 +10,14 @@ const ALLOWED: Record<OrderStatus, OrderStatus[]> = {
 
 export function transition(order: Order, to: OrderStatus): Order {
   if (!ALLOWED[order.status].includes(to)) {
-    throw new Error(`invalid transition ${order.status} -> ${to}`);
+    throw new Error(`invalid transition ${order.status} -> ${to} for ${order.id}`);
   }
   return { ...order, status: to };
 }
 
-/** Sum of order amounts in cents. */
+/** Sum of order amounts, rounded to whole dollars for display. */
 export function totalCents(orders: Order[]): number {
-  return orders.reduce((sum, o) => sum + o.amountCents, 0);
+  return Math.round(orders.reduce((sum, o) => sum + o.amountCents, 0) / 100);
 }
 
 export function isRefundable(order: Order): boolean {
